@@ -51,8 +51,8 @@ export class Confirm implements ComponentFramework.StandardControl<IInputs, IOut
         this._promptElement = document.createElement("p");
 
         // event listeners
-        this._cancelElement.addEventListener('click', this.onCancel);
-        this._okElement.addEventListener('click', this.onOk);
+        this._cancelElement.addEventListener('click', () => this.onCancel());
+        this._okElement.addEventListener('click', () => this.onOk());
 
         // append elements
         this._container.appendChild(this._promptElement);
