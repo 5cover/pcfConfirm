@@ -3,7 +3,7 @@
   <control
       namespace="RaphComponents"
       constructor="Confirm"
-      version="0.0.1"
+      version="0.0.2"
       display-name-key="control_Confirm_name"
       description-key="control_Confirm_desc"
       control-type="standard">
