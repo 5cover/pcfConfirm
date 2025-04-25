@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest>
   <control
       namespace="RaphComponents"
       constructor="Confirm"
-      version="0.0.2"
+      version="0.0.3"
       display-name-key="control_Confirm_name"
       description-key="control_Confirm_desc"
       control-type="standard">
@@ -30,20 +30,20 @@
     <!-- property node identifies a specific, configurable piece of data that the control expects
     from CDS -->
     <property
-        name="prompt"
+        name="Prompt"
         display-name-key="property_text_name"
         description-key="property_text_desc"
         of-type="SingleLine.Text"
         usage="bound"
         required="true" />
     <event
-        name="onOk"
-        display-name-key="event_onOk_name"
-        description-key="event_onOk_desc" />
+        name="OnOk"
+        display-name-key="event_OnOk_name"
+        description-key="event_OnOk_desc" />
     <event
-        name="onCancel"
-        display-name-key="event_onCancel_name"
-        description-key="event_onCancel_name" />
+        name="OnCancel"
+        display-name-key="event_OnCancel_name"
+        description-key="event_OnCancel_name" />
     <!--
       Property node's of-type attribute can be of-type-group attribute.
       Example:

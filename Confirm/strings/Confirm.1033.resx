@@ -133,19 +133,19 @@
     <value>String to build the confirmation prompt with</value>
     <comment/>
   </data>
-  <data name="event_onOk_name" xml:space="preserve">
+  <data name="event_OnOk_name" xml:space="preserve">
     <value>OnOk</value>
     <comment/>
   </data>
-  <data name="event_onOk_desc" xml:space="preserve">
+  <data name="event_OnOk_desc" xml:space="preserve">
     <value>Raised when the OK button is clicked</value>
     <comment/>
   </data>
-  <data name="event_onCancel_name" xml:space="preserve">
+  <data name="event_OnCancel_name" xml:space="preserve">
     <value>OnCancel</value>
     <comment/>
   </data>
-  <data name="event_onCancel_desc" xml:space="preserve">
+  <data name="event_OnCancel_desc" xml:space="preserve">
     <value>Raised when the Cancel button is clicked</value>
     <comment/>
   </data>

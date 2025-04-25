@@ -51,8 +51,8 @@ export class Confirm implements ComponentFramework.StandardControl<IInputs, IOut
         this._promptElement = document.createElement("p");
 
         // event listeners
-        this._cancelElement.addEventListener('click', () => this.onCancel());
-        this._okElement.addEventListener('click', () => this.onOk());
+        this._cancelElement.addEventListener('click', () => this.OnCancel());
+        this._okElement.addEventListener('click', () => this.OnOk());
 
         // append elements
         this._container.appendChild(this._promptElement);
@@ -86,19 +86,19 @@ export class Confirm implements ComponentFramework.StandardControl<IInputs, IOut
      * i.e. cancelling any pending remote calls, removing listeners, etc.
      */
     public destroy(): void {
-        this._cancelElement.removeEventListener('click', this.onCancel);
-        this._okElement.removeEventListener('click', this.onOk);
+        this._cancelElement.removeEventListener('click', this.OnCancel);
+        this._okElement.removeEventListener('click', this.OnOk);
     }
 
     private updateElements(): void {
-        this._promptElement.textContent = `Êtes vous sûr de vouloir ${this._context.parameters.prompt.raw}\xa0?`;
+        this._promptElement.textContent = `Êtes vous sûr de vouloir ${this._context.parameters.Prompt.raw}\xa0?`;
     }
 
-    private onCancel(): void {
-        this._context.events.onCancel();
+    private OnCancel(): void {
+        this._context.events.OnCancel();
     }
 
-    private onOk(): void {
-        this._context.events.onOk();
+    private OnOk(): void {
+        this._context.events.OnOk();
     }
 }
