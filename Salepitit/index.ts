@@ -2,10 +2,9 @@ import { IInputs, IOutputs } from "./generated/ManifestTypes";
 
 const DefaultWidth = 106, DefaultHeight = 40;
 
-class OutputState implements IOutputs {
-    private size?: IInputs['Size']['raw'];
-    private preferredWidth?: number;
-    private preferredHeight?: number;
+class OutputState {
+    private _preferredWidth?: number;
+    private _preferredHeight?: number;
     private _changed = false;
 
     public commit() {
@@ -14,23 +13,23 @@ class OutputState implements IOutputs {
         return changed;
     }
     get changed() { return this._changed; }
-    get Size() { return this.size; }
-    get PreferredWidth() { return this.preferredWidth; }
-    get PreferredHeight() { return this.preferredHeight; }
-    set Size(value: typeof this.size) { if (value !== this.size) { this._changed = true; this.size = value; } }
-    set PreferredWidth(value: typeof this.preferredWidth) { if (value !== this.preferredWidth) { this._changed = true; this.preferredWidth = value; } }
-    set PreferredHeight(value: typeof this.preferredHeight) { if (value !== this.preferredHeight) { this._changed = true; this.preferredHeight = value; } }
+    get preferredWidth() { return this._preferredWidth; }
+    get preferredHeight() { return this._preferredHeight; }
+    set preferredWidth(value: typeof this._preferredWidth) { if (value !== this._preferredWidth) { this._changed = true; this._preferredWidth = value; } }
+    set preferredHeight(value: typeof this._preferredHeight) { if (value !== this._preferredHeight) { this._changed = true; this._preferredHeight = value; } }
 }
 
 export class Salepitit implements ComponentFramework.StandardControl<IInputs, IOutputs> {
-    private ctx!: ComponentFramework.Context<IInputs>;
+    private ctx?: ComponentFramework.Context<IInputs>;
     private state = new OutputState;
+    private size?: IInputs['Size']['raw'];
     private notifyOutputChanged!: () => void;
     private readonly button = document.createElement('button');
 
     constructor() {
         this.button.type = 'button';
         this.button.textContent = 'Salepitit';
+        this.button.style.boxSizing = 'border-box';
     }
 
     /**
@@ -53,8 +52,6 @@ export class Salepitit implements ComponentFramework.StandardControl<IInputs, IO
         // add elements
         container.appendChild(this.button);
 
-        ctx.mode.trackContainerResize(true);
-
         this.updateView(ctx);
     }
 
@@ -65,27 +62,21 @@ export class Salepitit implements ComponentFramework.StandardControl<IInputs, IO
     public updateView(ctx: ComponentFramework.Context<IInputs>): void {
         this.ctx = ctx;
 
-        let size = ctx.parameters.Size.raw;
+        const isFill = 'fill' === ctx.parameters.Size.raw;
+        const changedToFill = 'fill' !== this.size && isFill;
+        
+        this.size = ctx.parameters.Size.raw;
+        ctx.mode.trackContainerResize(isFill);
 
-        if (size === 'default' && this.state.Size === 'default'
-            && (this.state.PreferredHeight !== ctx.mode.allocatedHeight
-                || this.state.PreferredWidth !== ctx.mode.allocatedWidth)) {
-            size = 'fill';
-        }
-
-        if (size === 'default') {
-            this.button.style.height = `${this.state.PreferredHeight = DefaultHeight}px`;
-            this.button.style.width = `${this.state.PreferredWidth = DefaultWidth}px`;
+        if (isFill) {
+            this.button.style.width = `${ctx.mode.allocatedWidth === -1 ? this.state.preferredWidth : (this.state.preferredWidth = ctx.mode.allocatedWidth)}px`;
+            this.button.style.height = `${ctx.mode.allocatedHeight === -1 ? this.state.preferredHeight : (this.state.preferredHeight = ctx.mode.allocatedHeight)}px`;
         } else {
-            console.log(`s${ctx.mode.allocatedWidth}w${ctx.mode.allocatedHeight}h`)
-            this.button.style.height = `${this.state.PreferredHeight = ctx.mode.allocatedHeight}px`;
-            this.button.style.width = `${this.state.PreferredWidth = ctx.mode.allocatedWidth}px`;
+            this.button.style.height = `${this.state.preferredHeight = DefaultHeight}px`;
+            this.button.style.width = `${this.state.preferredWidth = DefaultWidth}px`;
         }
 
-        this.state.Size = size;
-
-        if (this.state.commit()) {
-            console.log('put', this.state.Size, `${this.state.PreferredWidth}w${this.state.PreferredHeight}h`)
+        if (changedToFill || this.state.commit()) {
             this.notifyOutputChanged();
         }
     }
@@ -95,7 +86,10 @@ export class Salepitit implements ComponentFramework.StandardControl<IInputs, IO
      * @returns an object based on nomenclature defined in manifest, expecting object[s] for property marked as "bound" or "output"
      */
     public getOutputs(): IOutputs {
-        return this.state;
+        return {
+            PreferredHeight: this.state.preferredHeight,
+            PreferredWidth: this.state.preferredWidth,
+        };
     }
 
     /**

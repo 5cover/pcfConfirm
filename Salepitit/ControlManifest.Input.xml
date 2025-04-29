@@ -3,9 +3,9 @@
   <control
     namespace="RaphComponents.Salepitit"
     constructor="Salepitit"
-    version="0.0.4"
-    display-name-key="control_Salepitit_name"
-    description-key="control_Salepitit_desc"
+    version="0.0.10"
+    display-name-key="control-Salepitit-name"
+    description-key="control-Salepitit-desc"
     control-type="standard">
     <!--external-service-usage
     node declares whether this 3rd party PCF control is using external service or not, if yes, this
@@ -34,24 +34,25 @@
       display-name-key="property-Size-name"
       description-key="property-Size-desc"
       of-type="Enum"
-      usage="bound"
+      usage="input"
       required="true"
       default-value="default">
       <value name="Default" display-name-key="property-Size-value-Default">default</value>
-      <value name="Fill" display-name-key="property-Size-value-Fill">fill</value></property>
+      <value name="Fill" display-name-key="property-Size-value-Fill">fill</value>
+    </property>
     <property
-        name="PreferredWidth"
-        of-type="Whole.None"
-        display-name-key="property-PreferredWidth-name"
-        description-key="property-PreferredWidth-desc"
-        usage="output" />
+      name="PreferredWidth"
+      of-type="Whole.None"
+      display-name-key="property-PreferredWidth-name"
+      description-key="property-PreferredWidth-desc"
+      usage="output" />
     <property
-        name="PreferredHeight"
-        of-type="Whole.None"
-        display-name-key="property-PreferredHeight-name"
-        description-key="property-PreferredHeight-desc"
-        usage="output" />
-    
+      name="PreferredHeight"
+      of-type="Whole.None"
+      display-name-key="property-PreferredHeight-name"
+      description-key="property-PreferredHeight-desc"
+      usage="output" />
+
     <!--
       Property node's of-type attribute can be of-type-group attribute.
       Example:
@@ -70,6 +71,9 @@
         order="1" />
       <resx
         path="strings/Salepitit.1033.resx"
+        version="1.0.0" />
+      <resx
+        path="strings/Salepitit.1036.resx"
         version="1.0.0" />
       <!-- <css
               path="css/Salepitit.css"
