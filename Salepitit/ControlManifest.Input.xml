@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest>
   <control
-      namespace="RaphComponents.Confirm"
-      constructor="Confirm"
-      version="0.0.3"
-      display-name-key="control_Confirm_name"
-      description-key="control_Confirm_desc"
-      control-type="standard">
+    namespace="RaphComponents.Salepitit"
+    constructor="Salepitit"
+    version="0.0.4"
+    display-name-key="control_Salepitit_name"
+    description-key="control_Salepitit_desc"
+    control-type="standard">
     <!--external-service-usage
     node declares whether this 3rd party PCF control is using external service or not, if yes, this
     control will be considered as premium and please also add the external domain it is using.
@@ -30,20 +30,28 @@
     <!-- property node identifies a specific, configurable piece of data that the control expects
     from CDS -->
     <property
-        name="Prompt"
-        display-name-key="property_text_name"
-        description-key="property_text_desc"
-        of-type="SingleLine.Text"
-        usage="input"
-        required="true" />
-    <event
-        name="OnOk"
-        display-name-key="event_OnOk_name"
-        description-key="event_OnOk_desc" />
-    <event
-        name="OnCancel"
-        display-name-key="event_OnCancel_name"
-        description-key="event_OnCancel_name" />
+      name="Size"
+      display-name-key="property-Size-name"
+      description-key="property-Size-desc"
+      of-type="Enum"
+      usage="bound"
+      required="true"
+      default-value="default">
+      <value name="Default" display-name-key="property-Size-value-Default">default</value>
+      <value name="Fill" display-name-key="property-Size-value-Fill">fill</value></property>
+    <property
+        name="PreferredWidth"
+        of-type="Whole.None"
+        display-name-key="property-PreferredWidth-name"
+        description-key="property-PreferredWidth-desc"
+        usage="output" />
+    <property
+        name="PreferredHeight"
+        of-type="Whole.None"
+        display-name-key="property-PreferredHeight-name"
+        description-key="property-PreferredHeight-desc"
+        usage="output" />
+    
     <!--
       Property node's of-type attribute can be of-type-group attribute.
       Example:
@@ -58,14 +66,14 @@
     -->
     <resources>
       <code
-          path="index.ts"
-          order="1" />
-      <css
-          path="css/Confirm.css"
-          order="1" />
+        path="index.ts"
+        order="1" />
       <resx
-          path="strings/Confirm.1033.resx"
-          version="1.0.0" />
+        path="strings/Salepitit.1033.resx"
+        version="1.0.0" />
+      <!-- <css
+              path="css/Salepitit.css"
+              order="1" /> -->
     </resources>
     <!-- UNCOMMENT TO ENABLE THE SPECIFIED API
     <feature-usage>

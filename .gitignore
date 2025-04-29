@@ -4,14 +4,14 @@
 /node_modules
 
 # generated directory
-**/generated
+**/generated/
 
 # output directory
-/out
+**/out/
 
 # msbuild output directories
-/bin
-/obj
+**/bin/
+**/obj/
 
 # MSBuild Binary and Structured Log
 *.binlog

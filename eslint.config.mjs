@@ -7,7 +7,7 @@ import typescriptEslint from "typescript-eslint";
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   {
-    ignores: ["**/generated/"],
+    ignores: ["**/generated/", "**/out/"],
   },
   eslintjs.configs.recommended,
   ...typescriptEslint.configs.recommended,
@@ -33,7 +33,10 @@ export default [
     },
 
     rules: {
-      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": 'off',
+      '@typescript-eslint/no-empty-function': 'off',
+      '@typescript-eslint/adjacent-overload-signatures': 'off',
+      'no-debugger': 'off',
     },
   },
 ];

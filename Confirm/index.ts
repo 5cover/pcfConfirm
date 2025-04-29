@@ -1,16 +1,16 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
 
 export class Confirm implements ComponentFramework.StandardControl<IInputs, IOutputs> {
-    private _value: number;
-    private _notifyOutputChanged: () => void;
-    private labelElement: HTMLLabelElement;
-    private inputElement: HTMLInputElement;
-    private _container: HTMLDivElement;
-    private _context: ComponentFramework.Context<IInputs>;
+    private _value!: number;
+    private _notifyOutputChanged!: () => void;
+    private labelElement!: HTMLLabelElement;
+    private inputElement!: HTMLInputElement;
+    private _container!: HTMLDivElement;
+    private _context!: ComponentFramework.Context<IInputs>;
 
-    private _okElement: HTMLButtonElement;
-    private _cancelElement: HTMLButtonElement;
-    private _promptElement: HTMLParagraphElement;
+    private _okElement!: HTMLButtonElement;
+    private _cancelElement!: HTMLButtonElement;
+    private _promptElement!: HTMLParagraphElement;
 
     /**
      * Empty constructor.
