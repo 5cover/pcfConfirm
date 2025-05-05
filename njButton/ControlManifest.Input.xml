@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest>
   <control
-      namespace="RaphComponents.Confirm"
-      constructor="Confirm"
-      version="0.0.4"
-      display-name-key="control_Confirm_name"
-      description-key="control_Confirm_desc"
+      namespace="nj"
+      constructor="Button"
+      version="0.0.1"
+      display-name-key="control_Button_name"
+      description-key="control_Button_desc"
       control-type="standard">
     <!--external-service-usage
     node declares whether this 3rd party PCF control is using external service or not, if yes, this
@@ -30,20 +30,16 @@
     <!-- property node identifies a specific, configurable piece of data that the control expects
     from CDS -->
     <property
-        name="Prompt"
-        display-name-key="property_text_name"
-        description-key="property_text_desc"
+        name="Label"
+        display-name-key="property_Label_name"
+        description-key="property_Label_desc"
         of-type="SingleLine.Text"
-        usage="input"
+        usage="bound"
         required="true" />
     <event
-        name="OnOk"
-        display-name-key="event_OnOk_name"
-        description-key="event_OnOk_desc" />
-    <event
-        name="OnCancel"
-        display-name-key="event_OnCancel_name"
-        description-key="event_OnCancel_name" />
+        name="OnSelect"
+        display-name-key="event_OnSelect_name"
+        description-key="event_OnSelect_desc" />
     <!--
       Property node's of-type attribute can be of-type-group attribute.
       Example:
@@ -61,10 +57,10 @@
           path="index.ts"
           order="1" />
       <css
-          path="css/Confirm.css"
+          path="css/Button.css"
           order="1" />
       <resx
-          path="strings/Confirm.1033.resx"
+          path="strings/Button.1033.resx"
           version="1.0.0" />
     </resources>
     <!-- UNCOMMENT TO ENABLE THE SPECIFIED API

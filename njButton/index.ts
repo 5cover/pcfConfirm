@@ -1,12 +1,8 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
 
-export class Confirm implements ComponentFramework.StandardControl<IInputs, IOutputs> {
-    private _container: HTMLDivElement;
-    private _context: ComponentFramework.Context<IInputs>;
-
-    private _okElement!: HTMLButtonElement;
-    private _cancelElement!: HTMLButtonElement;
-    private _promptElement!: HTMLParagraphElement;
+export class Button implements ComponentFramework.StandardControl<IInputs, IOutputs> {
+    private button!: HTMLButtonElement;
+    private context!: ComponentFramework.Context<IInputs>;
 
     /**
      * Empty constructor.
@@ -30,31 +26,20 @@ export class Confirm implements ComponentFramework.StandardControl<IInputs, IOut
         container: HTMLDivElement
     ): void {
         // control initialization code
-        this._context = context;
+        this.context = context;
 
         // create elements
-        this._container = document.createElement("div");
+        this.button = document.createElement("button");
+        this.button.type = "button";
+        this.button.textContent = "OK"
 
-        this._okElement = document.createElement("button");
-        this._okElement.type = "button";
-        this._okElement.textContent = "OK"
+        // events
+        this.button.addEventListener('click', this.onSelect);
 
-        this._cancelElement = document.createElement("button");
-        this._cancelElement.type = "button";
-        this._cancelElement.textContent = "Annuler";
+        // add to dom
+        container.appendChild(this.button);
 
-        this._promptElement = document.createElement("p");
-
-        // event listeners
-        this._cancelElement.addEventListener('click', this.onCancel);
-        this._okElement.addEventListener('click', this.onOk);
-
-        // append elements
-        this._container.appendChild(this._promptElement);
-        this._container.appendChild(this._cancelElement);
-        this._container.appendChild(this._okElement);
-        container.appendChild(this._container);
-
+        // state refresh
         this.updateElements();
     }
 
@@ -64,7 +49,7 @@ export class Confirm implements ComponentFramework.StandardControl<IInputs, IOut
      * @param context The entire property bag available to control via Context Object; It contains values as set up by the customizer mapped to names defined in the manifest, as well as utility functions
      */
     public updateView(context: ComponentFramework.Context<IInputs>): void {
-        this._context = context;
+        this.context = context;
         this.updateElements();
     }
 
@@ -81,19 +66,14 @@ export class Confirm implements ComponentFramework.StandardControl<IInputs, IOut
      * i.e. cancelling any pending remote calls, removing listeners, etc.
      */
     public destroy(): void {
-        this._cancelElement.removeEventListener('click', this.onCancel);
-        this._okElement.removeEventListener('click', this.onOk);
+        this.button.removeEventListener('click', this.onSelect);
     }
 
     private updateElements(): void {
-        this._promptElement.textContent = `Êtes vous sûr de vouloir ${this._context.parameters.Prompt.raw}\xa0?`;
+        this.button.textContent = this.context.parameters.Label.raw;
     }
 
-    private readonly onCancel = () => {
-        this._context.events.OnCancel();
-    }
-
-    private readonly onOk = () => {
-        this._context.events.OnOk();
+    private readonly onSelect = () => {
+        this.context.events.OnCancel();
     }
 }
